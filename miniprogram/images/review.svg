@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 星星外框 -->
+  <path d="M24 6L28.18 18.18L42 18.18L31.91 25.82L36.09 38L24 30.36L11.91 38L16.09 25.82L6 18.18L19.82 18.18L24 6Z" 
+        fill="none" stroke="#7A7E83" stroke-width="2" stroke-linejoin="round"/>
+  <!-- 内部小星星 -->
+  <path d="M24 14L25.5 19.5L31 19.5L26.75 22.5L28.25 28L24 25L19.75 28L21.25 22.5L17 19.5L22.5 19.5L24 14Z" 
+        fill="#7A7E83"/>
+</svg>
+

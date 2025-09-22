@@ -1,0 +1,116 @@
+<!--review.wxml-->
+<navigation-bar title="历史订单" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- 统计信息 -->
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-number">{{totalOrders}}</text>
+        <text class="stat-label">总订单</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-number">{{totalAmount}}</text>
+        <text class="stat-label">总金额</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-number">{{avgRating}}</text>
+        <text class="stat-label">平均评分</text>
+      </view>
+    </view>
+
+    <!-- 筛选选项 -->
+    <view class="filter-tabs">
+      <view 
+        class="filter-tab {{filterType === 'all' ? 'active' : ''}}"
+        bindtap="setFilter"
+        data-type="all"
+      >
+        全部
+      </view>
+      <view 
+        class="filter-tab {{filterType === 'completed' ? 'active' : ''}}"
+        bindtap="setFilter"
+        data-type="completed"
+      >
+        已完成
+      </view>
+      <view 
+        class="filter-tab {{filterType === 'cancelled' ? 'active' : ''}}"
+        bindtap="setFilter"
+        data-type="cancelled"
+      >
+        已取消
+      </view>
+    </view>
+
+    <!-- 历史订单列表 -->
+    <view class="orders-list">
+      <view class="order-item" wx:for="{{filteredOrders}}" wx:key="id">
+        <view class="order-header">
+          <text class="order-date">{{item.date}}</text>
+          <view class="order-status {{item.status}}">
+            <text class="status-text">{{item.statusText}}</text>
+          </view>
+        </view>
+        
+        <view class="order-route">
+          <view class="route-item">
+            <view class="route-dot start"></view>
+            <text class="route-text">{{item.startAddress}}</text>
+          </view>
+          <view class="route-line"></view>
+          <view class="route-item">
+            <view class="route-dot end"></view>
+            <text class="route-text">{{item.endAddress}}</text>
+          </view>
+        </view>
+
+        <view class="order-details">
+          <view class="detail-row">
+            <text class="detail-label">{{userRole === 'driver' ? '乘客' : '司机'}}:</text>
+            <text class="detail-value">{{item.partnerName}}</text>
+          </view>
+          <view class="detail-row">
+            <text class="detail-label">订单时间:</text>
+            <text class="detail-value">{{item.time}}</text>
+          </view>
+          <view class="detail-row">
+            <text class="detail-label">行程距离:</text>
+            <text class="detail-value">{{item.distance}}</text>
+          </view>
+        </view>
+
+        <view class="order-footer">
+          <text class="order-price">¥{{item.price}}</text>
+          <view class="order-actions">
+            <button 
+              class="action-btn secondary" 
+              wx:if="{{item.status === 'completed'}}"
+              bindtap="viewDetails"
+              data-order="{{item}}"
+            >
+              查看详情
+            </button>
+            <button 
+              class="action-btn primary" 
+              wx:if="{{item.status === 'completed' && !item.reviewed}}"
+              bindtap="writeReview"
+              data-order="{{item}}"
+            >
+              写评价
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredOrders.length === 0}}">
+      <view class="empty-icon">📋</view>
+      <text class="empty-title">暂无订单记录</text>
+      <text class="empty-desc">{{filterType === 'all' ? '您还没有任何订单' : '没有符合条件的订单'}}</text>
+    </view>
+  </view>
+</scroll-view>

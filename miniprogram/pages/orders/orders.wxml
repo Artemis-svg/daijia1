@@ -1,0 +1,121 @@
+<!--orders.wxml-->
+<navigation-bar title="接单" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- 司机状态卡片 -->
+    <view class="driver-status-card">
+      <view class="status-header">
+        <view class="status-indicator {{driverStatus}}"></view>
+        <text class="status-text">{{statusText}}</text>
+        <button class="toggle-status-btn {{isLoading ? 'loading' : ''}}" bindtap="toggleStatus" disabled="{{isLoading}}">
+          {{isLoading ? '更新中...' : (driverStatus === 'online' ? '下线' : '上线')}}
+        </button>
+      </view>
+      <view class="driver-info">
+        <text class="driver-name">{{driverInfo.name}}</text>
+        <text class="driver-car">{{driverInfo.carModel}} · {{driverInfo.plateNumber}}</text>
+        <text class="today-earnings">今日收益: ¥{{todayEarnings}}</text>
+      </view>
+    </view>
+
+    <!-- 当前订单 -->
+    <view class="current-order" wx:if="{{currentOrder}}">
+      <view class="section-header">
+        <text class="section-title">当前订单</text>
+        <text class="order-status">{{currentOrder.status}}</text>
+      </view>
+      <view class="order-details">
+        <view class="route-info">
+          <view class="route-item">
+            <view class="route-dot start"></view>
+            <text class="route-text">{{currentOrder.startAddress}}</text>
+          </view>
+          <view class="route-line"></view>
+          <view class="route-item">
+            <view class="route-dot end"></view>
+            <text class="route-text">{{currentOrder.endAddress}}</text>
+          </view>
+        </view>
+        <view class="customer-info">
+          <text class="customer-name">乘客: {{currentOrder.customerName}}</text>
+          <text class="customer-phone">{{currentOrder.customerPhone}}</text>
+        </view>
+        <view class="order-actions">
+          <button class="action-btn secondary" bindtap="contactCustomer">联系乘客</button>
+          <button class="action-btn primary" bindtap="completeOrder">完成订单</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 可接订单列表 -->
+    <view class="available-orders" wx:if="{{driverStatus === 'online' && !currentOrder}}">
+      <text class="section-title">可接订单</text>
+      <view class="orders-list">
+        <view class="order-item" wx:for="{{availableOrders}}" wx:key="id">
+          <view class="order-header">
+            <text class="order-time">{{item.time}}</text>
+            <text class="order-distance">距离{{item.distance}}km</text>
+          </view>
+          <view class="route-info">
+            <view class="route-item">
+              <view class="route-dot start"></view>
+              <text class="route-text">{{item.startAddress}}</text>
+            </view>
+            <view class="route-line"></view>
+            <view class="route-item">
+              <view class="route-dot end"></view>
+              <text class="route-text">{{item.endAddress}}</text>
+            </view>
+          </view>
+          <view class="order-footer">
+            <text class="order-price">预估收益: ¥{{item.price}}</text>
+            <button class="accept-btn" bindtap="acceptOrder" data-order="{{item}}">接单</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 离线状态提示 -->
+    <view class="offline-tips" wx:if="{{driverStatus === 'offline'}}">
+      <view class="tips-icon">💤</view>
+      <text class="tips-title">您当前处于离线状态</text>
+      <text class="tips-desc">点击上线按钮开始接单</text>
+    </view>
+
+    <!-- 统计数据 -->
+    <view class="stats-section">
+      <text class="section-title">今日数据</text>
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="stat-number">{{todayStats.orders}}</text>
+          <text class="stat-label">完成订单</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-number">{{todayStats.hours}}</text>
+          <text class="stat-label">在线时长(h)</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-number">{{todayStats.rating}}</text>
+          <text class="stat-label">平均评分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 司机专用底部导航 -->
+<view class="driver-tabbar">
+  <view class="tabbar-item active">
+    <text class="tabbar-icon">📋</text>
+    <text class="tabbar-text">接单</text>
+  </view>
+  <view class="tabbar-item" bindtap="goToHistory">
+    <text class="tabbar-icon">📄</text>
+    <text class="tabbar-text">历史订单</text>
+  </view>
+  <view class="tabbar-item" bindtap="goToProfile">
+    <text class="tabbar-icon">👤</text>
+    <text class="tabbar-text">个人</text>
+  </view>
+</view>
+

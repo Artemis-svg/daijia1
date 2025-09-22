@@ -1,0 +1,373 @@
+/**orders.less**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.container {
+  padding: 40rpx;
+}
+
+/* 司机状态卡片 */
+.driver-status-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  margin-bottom: 40rpx;
+  color: #fff;
+  box-shadow: 0 8rpx 30rpx rgba(102, 126, 234, 0.3);
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.status-indicator {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  margin-right: 15rpx;
+}
+
+.status-indicator.online {
+  background-color: #07c160;
+  box-shadow: 0 0 0 4rpx rgba(7, 193, 96, 0.3);
+}
+
+.status-indicator.offline {
+  background-color: #ff6b6b;
+}
+
+.status-text {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.toggle-status-btn {
+  padding: 16rpx 32rpx;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 25rpx;
+  font-size: 28rpx;
+}
+
+.driver-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.driver-name {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+
+.driver-car {
+  font-size: 28rpx;
+  opacity: 0.8;
+}
+
+.today-earnings {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #ffd700;
+}
+
+/* 通用section样式 */
+.current-order,
+.available-orders,
+.stats-section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.order-status {
+  font-size: 24rpx;
+  color: #07c160;
+  background: #e8f5e8;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+/* 路线信息 */
+.route-info {
+  position: relative;
+  margin-bottom: 30rpx;
+}
+
+.route-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.route-item:last-child {
+  margin-bottom: 0;
+}
+
+.route-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.route-dot.start {
+  background-color: #07c160;
+}
+
+.route-dot.end {
+  background-color: #ff6b6b;
+}
+
+.route-line {
+  position: absolute;
+  left: 8rpx;
+  top: 30rpx;
+  width: 2rpx;
+  height: 30rpx;
+  background-color: #e5e5e5;
+}
+
+.route-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 客户信息 */
+.customer-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+}
+
+.customer-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.customer-phone {
+  font-size: 26rpx;
+  color: #07c160;
+}
+
+/* 操作按钮 */
+.order-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  border: none;
+}
+
+.action-btn.primary {
+  background: #07c160;
+  color: #fff;
+}
+
+.action-btn.secondary {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* 可接订单列表 */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.order-item {
+  padding: 30rpx;
+  border: 2rpx solid #e5e5e5;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.order-item:active {
+  border-color: #07c160;
+  background-color: #f0fdf4;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.order-time {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.order-distance {
+  font-size: 24rpx;
+  color: #07c160;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.order-price {
+  font-size: 28rpx;
+  color: #07c160;
+  font-weight: 600;
+}
+
+.accept-btn {
+  padding: 16rpx 32rpx;
+  background: #07c160;
+  color: #fff;
+  border: none;
+  border-radius: 25rpx;
+  font-size: 26rpx;
+}
+
+/* 离线提示 */
+.offline-tips {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 40rpx;
+}
+
+.tips-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.tips-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.tips-desc {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 统计数据 */
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #07c160;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 司机专用底部导航 */
+.driver-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120rpx;
+  background: #fff;
+  border-top: 1rpx solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tabbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 10rpx;
+  transition: all 0.3s;
+}
+
+.tabbar-item.active {
+  color: #07c160;
+}
+
+.tabbar-item:active {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8rpx;
+}
+
+.tabbar-icon {
+  font-size: 40rpx;
+  margin-bottom: 6rpx;
+  display: block;
+}
+
+.tabbar-text {
+  font-size: 22rpx;
+  color: inherit;
+}
+
+/* 为司机页面添加底部padding，避免被tabbar遮挡 */
+.scrollarea {
+  padding-bottom: 140rpx;
+}
+

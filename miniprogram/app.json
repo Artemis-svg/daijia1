@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/register/register",
+    "pages/proxy/proxy",
+    "pages/map-picker/map-picker",
+    "pages/orders/orders", 
+    "pages/review/review",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/proxy/proxy",
+        "text": "🚗 代驾"
+      },
+      {
+        "pagePath": "pages/review/review",
+        "text": "⭐ 评价"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "👤 个人"
+      }
+    ]
+  },
+  "style": "v2",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于代驾服务的起点定位"
+    }
+  },
+  "requiredBackgroundModes": ["location"]
+}

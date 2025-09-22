@@ -1,0 +1,57 @@
+<!--map-picker.wxml-->
+<view class="map-container">
+  <!-- 地图组件 -->
+  <map
+    id="map"
+    class="map"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    bindtap="onMapTap"
+    show-location="{{true}}"
+  >
+  </map>
+
+  <!-- 地址信息卡片 -->
+  <view class="address-card">
+    <view class="card-header">
+      <text class="location-icon">📍</text>
+      <text class="card-title">{{addressType === 'start' ? '出发地' : '目的地'}}</text>
+    </view>
+    
+    <view class="address-info">
+      <view class="main-address">{{selectedAddress.name || '获取位置中...'}}</view>
+      <view class="detail-address">{{selectedAddress.address || ''}}</view>
+    </view>
+
+    <!-- 提示信息 -->
+    <view class="tip-info" wx:if="{{!selectedAddress.name}}">
+      <text class="tip-text">👆 点击地图选择位置</text>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="bottom-actions">
+    <button class="locate-btn" bindtap="getCurrentLocation">
+      <text class="btn-icon">🎯</text>
+      <text class="btn-text">定位</text>
+    </button>
+    
+    <button 
+      class="confirm-btn" 
+      bindtap="confirmLocation"
+      disabled="{{!selectedAddress.name}}"
+    >
+      确认位置
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-overlay" wx:if="{{isLoading}}">
+    <view class="loading-content">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">{{loadingText}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,61 @@
+<!--proxy.wxml-->
+<navigation-bar title="代驾" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- 地址选择区域 -->
+    <view class="address-section">
+      <view class="address-item" bindtap="selectStartAddress">
+        <view class="address-dot start-dot"></view>
+        <view class="address-content">
+          <view class="address-display {{!startAddress ? 'placeholder' : ''}}">
+            {{startAddress || '请选择出发地'}}
+          </view>
+          <view class="address-icon">📍</view>
+        </view>
+      </view>
+      <view class="address-line"></view>
+      <view class="address-item" bindtap="selectEndAddress">
+        <view class="address-dot end-dot"></view>
+        <view class="address-content">
+          <view class="address-display {{!endAddress ? 'placeholder' : ''}}">
+            {{endAddress || '请选择目的地'}}
+          </view>
+          <view class="address-icon">📍</view>
+        </view>
+      </view>
+      
+      <!-- 交换按钮 -->
+      <view class="swap-btn" bindtap="swapAddresses" wx:if="{{startAddress && endAddress}}">
+        <text class="swap-icon">🔄</text>
+      </view>
+    </view>
+
+    <!-- 服务类型选择 -->
+    <view class="service-type-section">
+      <text class="section-title">选择服务类型</text>
+      <view class="service-types">
+        <view 
+          class="service-type-item {{selectedServiceType === item.type ? 'selected' : ''}}" 
+          wx:for="{{serviceTypes}}" 
+          wx:key="type"
+          bindtap="selectServiceType"
+          data-type="{{item.type}}"
+        >
+          <text class="service-icon">{{item.icon}}</text>
+          <view class="service-info">
+            <text class="service-name">{{item.name}}</text>
+            <text class="service-desc">{{item.desc}}</text>
+          </view>
+          <text class="service-price">{{item.price}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 预约代驾按钮 -->
+    <view class="action-section">
+      <button class="call-proxy-btn" bindtap="callProxy" disabled="{{!startAddress || !endAddress}}">
+        立即预约代驾
+      </button>
+    </view>
+  </view>
+</scroll-view>
